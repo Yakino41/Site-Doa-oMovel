@@ -1,0 +1,493 @@
+/* Duplicate compact block removed. The expanded, readable stylesheet
+  is retained below for clarity and maintainability. */
+
+:root{
+  --brand: #2d572c;
+  --brand-strong: #5aa85a;
+  --bg: #fdfdfd;
+  --muted: #666;
+  --card-bg: #ffffff;
+  --surface: #f8f9fa;
+  --max-width: 1200px;
+  --radius: 12px;
+  --gap: 20px;
+}
+
+/* ------------------------- Reset / Base ------------------------------- */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+
+html{
+  scroll-behavior:smooth
+}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+  background:var(--bg);
+  color:#333
+}
+/* ------------------------- Acessibilidade ----------------------------- */
+/* Apply desaturate/grayscale when P&B mode is active (toggled by JS)
+   Target only content elements to avoid rendering artifacts on body */
+body.a11y-desaturate .hero,
+body.a11y-desaturate main,
+body.a11y-desaturate section,
+body.a11y-desaturate header,
+body.a11y-desaturate footer,
+body.a11y-desaturate .modal-overlay {
+  filter: grayscale(1) saturate(0);
+  -webkit-filter: grayscale(1) saturate(0);
+}
+
+/* Ensure navbar always stays in color */
+body.a11y-desaturate .navbar {
+  filter: none !important;
+}
+
+/* small visual indicator for accessibility state (hidden by default) */
+#a11y-indicator {
+  transition: opacity .35s ease, transform .25s;
+  opacity: 0;
+}
+
+/* ------------------------- Navegação --------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(45, 87, 44, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 12px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.nav-btn {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+/* --------------------- Acessibilidade (labels/icons) ------------------ */
+.letraAcess,
+.satAcess {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+  background: transparent;
+}
+
+.letraAcess img,
+.satAcess img {
+  width: 40px;
+  height: auto;
+  display: block;
+  transition: transform .25s;
+}
+
+.letraAcess:hover,
+.satAcess:hover,
+.letraAcess:focus-visible,
+.satAcess:focus-visible {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+
+.letraAcess:active,
+.satAcess:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+/* ------------------------- Modais ------------------------------------ */
+.modal-toggle {
+  display: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .28s;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: 26px;
+  border-radius: var(--radius);
+  width: 94%;
+  max-width: 560px;
+  transform: scale(0.96);
+  transition: all .28s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  max-height: 84vh;
+  overflow: auto;
+}
+
+.modal-large {
+  max-width: 760px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+/* checkbox-driven modal visibility (keeps existing HTML structure) */
+#modal-cadastro:checked ~ .modal-overlay:nth-of-type(1),
+#modal-login:checked ~ .modal-overlay:nth-of-type(2),
+#modal-consulta:checked ~ .modal-overlay:nth-of-type(3),
+#modal-cadastro-movel:checked ~ .modal-overlay:nth-of-type(4) {
+  opacity: 1;
+  visibility: visible;
+}
+
+#modal-cadastro:checked ~ .modal-overlay:nth-of-type(1) .modal-content,
+#modal-login:checked ~ .modal-overlay:nth-of-type(2) .modal-content,
+#modal-consulta:checked ~ .modal-overlay:nth-of-type(3) .modal-content,
+#modal-cadastro-movel:checked ~ .modal-overlay:nth-of-type(4) .modal-content {
+  transform: scale(1);
+}
+
+/* ------------------------- Formulários -------------------------------- */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modal-form h2 {
+  color: var(--brand);
+  text-align: center;
+}
+
+.form-group label {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--brand);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border-color .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  background: var(--brand);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: var(--brand-strong);
+}
+
+/* ------------------------- Hero / Cabeçalho ---------------------------- */
+.hero {
+  background: url('folha.jpg') no-repeat center center/cover;
+  background-attachment: fixed;
+  color: white;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  margin-top: 70px; /* Espaço para a navegação fixa */
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: auto;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+/* ------------------------- Seções comuns ------------------------------- */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #2d572c;
+}
+
+.info-content { max-width: 800px; margin: 0 auto 40px; }
+.intro-text {
+  font-size: 1.1rem; line-height: 1.8; color: #555; background: #f8f9fa;
+  padding: 20px; border-radius: 10px; border-left: 4px solid #2d572c;
+}
+
+/* ------------------------- Cards -------------------------------------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  color: #2d572c;
+  font-size: 1.2rem;
+}
+
+/* ------------------------- Caixa de acesso ----------------------------- */
+.access-box {
+  background: #eaf5ea;
+  padding: 40px 20px;
+  text-align: center;
+  margin: 40px 0;
+  border-radius: 15px;
+}
+
+.access-box h2 {
+  margin-bottom: 20px;
+  color: #2d572c;
+}
+
+.access-box .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.access-box .btn {
+  text-decoration: none;
+  background: #2d572c;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  transition: background 0.3s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.access-box .btn:hover { background: #5aa85a; }
+
+/* ------------------------- Filtros / Lista de móveis ------------------- */
+.filtros {
+  margin-bottom: 20px;
+}
+
+.filtros h3 {
+  margin-bottom: 15px;
+  color: #2d572c;
+}
+
+.filtros input { display: none; }
+
+.filtros label {
+  padding: 8px 15px;
+  background: #2d572c;
+  color: white;
+  margin: 0 5px 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.filtros label:hover { background: #3e6f3d; }
+
+.filtros input:checked + label { background: #5aa85a; }
+
+.lista-moveis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.movel {
+  display: none;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-left: 4px solid #2d572c;
+}
+
+.movel h4 { margin-bottom: 8px; color: #2d572c; }
+.movel p { color: #666; font-size: 0.9rem; }
+
+/* Mostrar móveis baseado no filtro (estrutura existente) */
+#todos:checked ~ .lista-moveis .movel { display: block; }
+#sofa:checked ~ .lista-moveis .sofa { display: block; }
+#mesa:checked ~ .lista-moveis .mesa { display: block; }
+#cama:checked ~ .lista-moveis .cama { display: block; }
+
+.stats {
+  padding: 60px 20px;
+  background: #f0f7f0;
+  text-align: center;
+}
+
+.stats h2 { margin-bottom: 40px; color: #2d572c; }
+
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.stat-card:hover { transform: translateY(-5px); }
+
+.stat-card h3 { margin-bottom: 15px; color: #2d572c; }
+
+/* ------------------------- Rodapé ------------------------------------ */
+footer {
+  background: #2d572c;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ------------------------- Responsividade ----------------------------- */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-left, .nav-right {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .hero-text h1 { font-size: 2rem; }
+
+  .cards { grid-template-columns: 1fr; }
+
+  .access-box .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .access-box .btn { width: 200px; }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .lista-moveis { grid-template-columns: 1fr; }
+}
+
+/* ------------------------- Fixes / Overrides -------------------------- */
+/* Ensure modal form controls use full width and avoid layout artifacts */
+.modal-content .form-group input,
+.modal-content .form-group select,
+.modal-content .form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent background-attachment fixed which may create painting/stacking artifacts
+   when filters are applied in some browsers; force scroll for stability */
+.hero { background-attachment: scroll !important; }

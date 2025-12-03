@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doação de Móveis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Checkboxes invisíveis para controlar os modais -->
+  <input type="checkbox" id="modal-cadastro" class="modal-toggle">
+  <input type="checkbox" id="modal-login" class="modal-toggle">
+  <input type="checkbox" id="modal-consulta" class="modal-toggle">
+  <input type="checkbox" id="modal-cadastro-movel" class="modal-toggle">
+
+  <!-- Navegação superior -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <!-- Pode colocar logo aqui -->
+        <label for="letra-acessiblidade" class="letraAcess" role="button" tabindex="0" aria-pressed="false" title="Tamanho: Normal">
+          <img src="LetraAcess.png" alt="Alternar tamanho da letra">
+        </label>
+        <label for="cor-acessibilidade" class="satAcess" role="button" tabindex="0" aria-pressed="false" title="Saturação: Normal">
+          <img src="cor.png" alt="Alternar saturação de cor">
+        </label>
+      </div>
+
+      <div class="nav-right">
+        <a href="#sobre" class="nav-btn">Sobre</a>
+        <label for="modal-cadastro" class="nav-btn">Cadastro</label>
+        <label for="modal-login" class="nav-btn">Login</label>
+      </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modal de Cadastro -->
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <label for="modal-cadastro" class="modal-close">&times;</label>
+      <h2>Cadastro de Usuário</h2>
+      <form class="modal-form">
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+        </div>
+        <div class="form-group">
+          <label for="numero-telefone">Telefone:
+            <input type="text" id="telefone" name="telefone" placeholder="(00)000000000" required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="email-cadastro">Email:</label>
+          <input type="email" id="email-cadastro" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password-cadastro">Senha:</label>
+          <input type="passowrdcad" id="password-cadastro" name="senha" placeholder="Senha..." required>
+          <p>• Senha Deve Conter No Máximo 8 caracteres, pelo menos 1 número, 1 letra maiúscula e 1 letra minúscula.</p>
+        </div>
+        <div class="form-group">
+          <label for="password-confirm-cadastro">Confirme a Senha:</label>
+          <input type="passwordcad" id="password-confirm-cadastro" name="senha-confirm" placeholder="Confirme a senha..." required>
+          <p>• Confirme a senha para garantir que digitou corretamente.</p>
+        </div>
+        <button type="submit" class="submit-btn" onclick="cadastro()">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Login -->
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <label for="modal-login" class="modal-close">&times;</label>
+      <h2>Login</h2>
+      <form class="modal-form">
+        <div class="form-group">
+          <label for="userEmail">Email:</label>
+          <input type="email" id="userEmail" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="userSenha">Senha:</label>
+          <input type="password" id="userSenha" name="senha" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="submit-btn" onclick="login()">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Consulta -->
+  <div class="modal-overlay">
+    <div class="modal-content modal-large">
+      <label for="modal-consulta" class="modal-close">&times;</label>
+      <h2>Consulta de Móveis</h2>
+      <div class="filtros">
+        <h3>Filtrar por tipo:</h3>
+        <input type="radio" name="tipo" id="todos" checked>
+        <label for="todos">Todos</label>
+
+        <input type="radio" name="tipo" id="sofa">
+        <label for="sofa">Sofá</label>
+
+        <input type="radio" name="tipo" id="mesa">
+        <label for="mesa">Mesa</label>
+
+        <input type="radio" name="tipo" id="cama">
+        <label for="cama">Cama</label>
+
+        <input type="radio" name="tipo" id="cadeira">
+        <label for="cadeira">Cadeira</label>
+
+        <input type="radio" name="tipo" id="armario">
+        <label for="armario">Armário</label>
+
+        <input type="radio" name="tipo" id="estante">
+        <label for="estante">Estante</label>
+      </div>
+
+      <div class="lista-moveis">
+        <!-- Móveis cadastrados pelo usuário aparecerão aqui -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Cadastro de Móveis -->
+  <div class="modal-overlay">
+    <div class="modal-content modal-large">
+      <label for="modal-cadastro-movel" class="modal-close">&times;</label>
+      <h2>Cadastro de Móveis</h2>
+      <form class="modal-form">
+        <div class="form-group">
+          <label for="tipo-movel">Tipo de Móvel:</label>
+          <select id="tipo-movel" name="tipo-movel" required>
+            <option value="">Selecione o tipo</option>
+            <option value="sofa">Sofá</option>
+            <option value="mesa">Mesa</option>
+            <option value="cama">Cama</option>
+            <option value="cadeira">Cadeira</option>
+            <option value="armario">Armário</option>
+            <option value="estante">Estante</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" name="descricao" placeholder="Descreva o móvel (cor, tamanho, estado, etc.)" style="font-family: Arial, Helvetica, sans-serif;"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado de Conservação:</label>
+          <select id="estado" name="estado" required>
+            <option value="">Selecione o estado</option>
+            <option value="novo">Novo</option>
+            <option value="otimo">Ótimo</option>
+            <option value="bom">Bom</option>
+            <option value="regular">Regular</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contato">Seu Contato:</label>
+          <input type="text" id="contato" name="contato" placeholder="Telefone ou email" required>
+        </div>
+        <button type="submit" class="submit-btn">Cadastrar Móvel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Dê um novo lar aos seus móveis</h1>
+      <p>Doar móveis é compartilhar conforto, dignidade e esperança.</p>
+    </div>
+  </header>
+
+  <!-- Por que doar -->
+  <section class="about" id="sobre">
+    <h2>Por que doar móveis?</h2>
+    <div class="info-content">
+      <p class="intro-text">A doação de móveis é uma prática sustentável e solidária que beneficia tanto o meio ambiente
+        quanto as pessoas em situação de vulnerabilidade social. Quando você doa um móvel em bom estado, está
+        contribuindo para um mundo mais justo e sustentável.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>🌱 Sustentabilidade</h3>
+        <p>Reduza o desperdício e dê uma segunda vida aos seus móveis. Evite que itens em bom estado sejam descartados
+          inadequadamente no meio ambiente.</p>
+      </div>
+      <div class="card">
+        <h3>❤️ Solidariedade</h3>
+        <p>Ajude famílias e pessoas que precisam mobiliar seus lares. Sua doação pode fazer a diferença na vida de quem
+          mais precisa.</p>
+      </div>
+      <div class="card">
+        <h3>♻️ Reutilização</h3>
+        <p>Promova a economia circular e a reutilização consciente. Cada móvel doado é uma oportunidade de reduzir o
+          consumo de novos recursos.</p>
+      </div>
+      <div class="card">
+        <h3>🏠 Dignidade</h3>
+        <p>Proporcione conforto e dignidade para famílias que estão recomeçando suas vidas ou passando por dificuldades
+          financeiras.</p>
+      </div>
+      <div class="card">
+        <h3>🤝 Comunidade</h3>
+        <p>Fortaleça os laços comunitários e promova a cultura da solidariedade e do compartilhamento em sua região.</p>
+      </div>
+      <div class="card">
+        <h3>💚 Impacto Social</h3>
+        <p>Contribua para a redução da desigualdade social e para a construção de uma sociedade mais justa e inclusiva.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Seção de Dados sobre Descarte -->
+  <section class="stats">
+    <h2>Estatísticas</h2>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <h3>📦 Móveis Doados</h3>
+        <p>Mais de 1.500 móveis já foram doados através de nossa plataforma.</p>
+      </div>
+      <div class="stat-card">
+        <h3>👨‍👩‍👧‍👦 Famílias Ajudadas</h3>
+        <p>Mais de 500 famílias já receberam móveis e melhoraram suas casas.</p>
+      </div>
+      <div class="stat-card">
+        <h3>🌍 Impacto Ambiental</h3>
+        <p>Evitamos o descarte de toneladas de móveis em aterros sanitários.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Caixa de acesso -->
+  <section class="access-box">
+    <h2>Gerencie seus móveis</h2>
+    <div class="buttons">
+      <label for="modal-cadastro-movel" class="btn" onclick="abrirCadastroMovel(); return false;">Cadastrar Móvel</label>
+      <label for="modal-consulta" class="btn">Consultar Móveis</label>
+    </div>
+  </section>
+  <footer class="footer">
+    <p>&copy; 2025 Doação de Móveis. Todos os direitos reservados.</p>
+    <p>GitHub: <a href="https://github.com/Yakino41/ProjetoWeb-Front-End-HTML-CSS" target="_blank" rel="noopener noreferrer">https://github.com/Yakino41/ProjetoWeb-Front-End-HTML-CSS</a></p>
+  </footer>
+    <!-- accessibility script -->
+    <script src="access-controls.js"></script>
+    <script src="form-handler.js"></script>
+    <script src="cadastro.js"></script>
+</body>
+</html>
