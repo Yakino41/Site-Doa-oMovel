@@ -1,6 +1,4 @@
-/* Duplicate compact block removed. The expanded, readable stylesheet
-  is retained below for clarity and maintainability. */
-
+/* ------------------------- Variáveis Globais -------------------------- */
 :root{
   --brand: #2d572c;
   --brand-strong: #5aa85a;
@@ -30,8 +28,7 @@ body{
   color:#333
 }
 /* ------------------------- Acessibilidade ----------------------------- */
-/* Apply desaturate/grayscale when P&B mode is active (toggled by JS)
-   Target only content elements to avoid rendering artifacts on body */
+
 body.a11y-desaturate .hero,
 body.a11y-desaturate main,
 body.a11y-desaturate section,
@@ -42,12 +39,12 @@ body.a11y-desaturate .modal-overlay {
   -webkit-filter: grayscale(1) saturate(0);
 }
 
-/* Ensure navbar always stays in color */
+/* Garantir que a barra de navegação permaneça sempre colorida */
 body.a11y-desaturate .navbar {
   filter: none !important;
 }
 
-/* small visual indicator for accessibility state (hidden by default) */
+/* pequeno indicador visual para o estado de acessibilidade */
 #a11y-indicator {
   transition: opacity .35s ease, transform .25s;
   opacity: 0;
@@ -181,7 +178,7 @@ body.a11y-desaturate .navbar {
   color: #333;
 }
 
-/* checkbox-driven modal visibility (keeps existing HTML structure) */
+/* Visibilidade modal controlada por caixas de seleção */
 #modal-cadastro:checked ~ .modal-overlay:nth-of-type(1),
 #modal-login:checked ~ .modal-overlay:nth-of-type(2),
 #modal-consulta:checked ~ .modal-overlay:nth-of-type(3),
@@ -406,6 +403,104 @@ section h2 {
 .movel h4 { margin-bottom: 8px; color: #2d572c; }
 .movel p { color: #666; font-size: 0.9rem; }
 
+/* Botão de deletar móvel */
+.movel button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.movel button:hover {
+  background: #b71c1c;
+}
+
+/* Seção de Pesquisa */
+.search-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f0f8f0;
+  border-radius: 8px;
+  border-left: 4px solid #2d572c;
+}
+
+.search-section h3 {
+  margin-top: 0;
+  color: #2d572c;
+}
+
+.search-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-inputs select,
+.search-inputs input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.search-inputs input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.btn-pesquisar,
+.btn-limpar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-pesquisar {
+  background: #2d572c;
+  color: white;
+}
+
+.btn-pesquisar:hover {
+  background: #1e3d1f;
+}
+
+.btn-limpar {
+  background: #666;
+  color: white;
+}
+
+.btn-limpar:hover {
+  background: #444;
+}
+
+/* Botões de Ação */
+.action-buttons {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-deletar-todos {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-deletar-todos:hover {
+  background: #b71c1c !important;
+}
+
 /* Mostrar móveis baseado no filtro (estrutura existente) */
 #todos:checked ~ .lista-moveis .movel { display: block; }
 #sofa:checked ~ .lista-moveis .sofa { display: block; }
@@ -480,7 +575,6 @@ footer {
 }
 
 /* ------------------------- Fixes / Overrides -------------------------- */
-/* Ensure modal form controls use full width and avoid layout artifacts */
 .modal-content .form-group input,
 .modal-content .form-group select,
 .modal-content .form-group textarea {
@@ -488,6 +582,4 @@ footer {
   box-sizing: border-box;
 }
 
-/* Prevent background-attachment fixed which may create painting/stacking artifacts
-   when filters are applied in some browsers; force scroll for stability */
 .hero { background-attachment: scroll !important; }

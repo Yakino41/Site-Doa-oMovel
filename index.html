@@ -20,12 +20,10 @@
     <div class="nav-container">
       <div class="nav-left">
         <!-- Pode colocar logo aqui -->
-        <label for="letra-acessiblidade" class="letraAcess" role="button" tabindex="0" aria-pressed="false"
-          title="Tamanho: Normal">
+        <label for="letra-acessiblidade" class="letraAcess" role="button" tabindex="0" aria-pressed="false" title="Tamanho: Normal">
           <img src="LetraAcess.png" alt="Alternar tamanho da letra">
         </label>
-        <label for="cor-acessibilidade" class="satAcess" role="button" tabindex="0" aria-pressed="false"
-          title="Saturação: Normal">
+        <label for="cor-acessibilidade" class="satAcess" role="button" tabindex="0" aria-pressed="false" title="Saturação: Normal">
           <img src="cor.png" alt="Alternar saturação de cor">
         </label>
       </div>
@@ -35,7 +33,7 @@
         <label for="modal-cadastro" class="nav-btn">Cadastro</label>
         <label for="modal-login" class="nav-btn">Login</label>
       </div>
-    </div>
+      </div>
     </div>
   </nav>
 
@@ -65,8 +63,7 @@
         </div>
         <div class="form-group">
           <label for="password-confirm-cadastro">Confirme a Senha:</label>
-          <input type="passwordcad" id="password-confirm-cadastro" name="senha-confirm"
-            placeholder="Confirme a senha..." required>
+          <input type="passwordcad" id="password-confirm-cadastro" name="senha-confirm" placeholder="Confirme a senha..." required>
           <p>• Confirme a senha para garantir que digitou corretamente.</p>
         </div>
         <button type="submit" class="submit-btn" onclick="cadastro()">Cadastrar</button>
@@ -98,6 +95,7 @@
     <div class="modal-content modal-large">
       <label for="modal-consulta" class="modal-close">&times;</label>
       <h2>Consulta de Móveis</h2>
+      
       <div class="filtros">
         <h3>Filtrar por tipo:</h3>
         <input type="radio" name="tipo" id="todos" checked>
@@ -120,6 +118,24 @@
 
         <input type="radio" name="tipo" id="estante">
         <label for="estante">Estante</label>
+      </div>
+      <div class="search-section">
+        <h3>Pesquisar móvel:</h3>
+        <div class="search-inputs">
+          <select id="campo-pesquisa">
+            <option value="tipo">Tipo</option>
+            <option value="descricao">Descrição</option>
+            <option value="estado">Estado</option>
+            <option value="contato">Contato</option>
+          </select>
+          <input type="text" id="valor-pesquisa" placeholder="Digite o valor para pesquisar...">
+          <button onclick="executarPesquisa()" class="btn-pesquisar">🔍 Pesquisar</button>
+          <button onclick="limparPesquisa()" class="btn-limpar">Limpar</button>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button onclick="deletarTodos()" class="btn-deletar-todos" style="background: #d32f2f; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗑️ Deletar Todos os Móveis</button>
       </div>
 
       <div class="lista-moveis">
@@ -148,8 +164,8 @@
         </div>
         <div class="form-group">
           <label for="descricao">Descrição:</label>
-          <textarea id="descricao" name="descricao" placeholder="Descreva o móvel (cor, tamanho, estado, etc.)"
-            style="font-family: Arial, Helvetica, sans-serif;" required></textarea>
+          <textarea id="descricao" name="descricao" placeholder="Descreva o móvel (cor, tamanho, estado, etc.)" style="font-family: Arial, Helvetica, sans-serif;"
+            required></textarea>
         </div>
         <div class="form-group">
           <label for="estado">Estado de Conservação:</label>
@@ -240,8 +256,7 @@
   <section class="access-box">
     <h2>Gerencie seus móveis</h2>
     <div class="buttons">
-      <label for="modal-cadastro-movel" class="btn" onclick="abrirCadastroMovel(); return false;">Cadastrar
-        Móvel</label>
+      <label for="modal-cadastro-movel" class="btn" onclick="abrirCadastroMovel(); return false;">Cadastrar Móvel</label>
       <label for="modal-consulta" class="btn">Consultar Móveis</label>
     </div>
   </section>
@@ -249,10 +264,8 @@
     <p>&copy; 2025 Doação de Móveis. Todos os direitos reservados.</p>
     <p>GitHub: <a href="https://github.com/Yakino41/Site-Doa-oMovel" target="_blank">Yakino41/Site-Doa-oMovel</a></p>
   </footer>
-  <!-- accessibility script -->
-  <script src="access-controls.js"></script>
-  <script src="form-handler.js"></script>
-  <script src="cadastro.js"></script>
+    <script src="access-controls.js"></script>
+    <script src="form-handler.js"></script>
+    <script src="cadastro.js"></script>
 </body>
-
 </html>
