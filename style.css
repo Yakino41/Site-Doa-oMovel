@@ -1,53 +1,56 @@
-/* ------------------------- Variáveis Globais -------------------------- */
-:root{
+/* Duplicate compact block removed. The expanded, readable stylesheet
+  is retained below for clarity and maintainability. */
+
+:root {
   --brand: #2d572c;
   --brand-strong: #5aa85a;
+  --brand-dark: #1e3d1f;
+  --danger: #d32f2f;
+  --danger-dark: #b71c1c;
   --bg: #fdfdfd;
   --muted: #666;
   --card-bg: #ffffff;
   --surface: #f8f9fa;
+  --surface-light: #f0f8f0;
+  --border-light: #ddd;
+  --text-muted: #555;
+  --text-secondary: #999;
   --max-width: 1200px;
   --radius: 12px;
   --gap: 20px;
+  --transition: 0.28s ease;
 }
 
 /* ------------------------- Reset / Base ------------------------------- */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0
+/* Reset / Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html{
-  scroll-behavior:smooth
+html {
+  scroll-behavior: smooth;
 }
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.6;
-  background:var(--bg);
-  color:#333
-}
-/* ------------------------- Acessibilidade ----------------------------- */
 
-body.a11y-desaturate .hero,
-body.a11y-desaturate main,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: #333;
+}
+
+/* Acessibilidade - Desaturação P&B */
 body.a11y-desaturate section,
-body.a11y-desaturate header,
-body.a11y-desaturate footer,
+body.a11y-desaturate main,
+body.a11y-desaturate .hero,
 body.a11y-desaturate .modal-overlay {
   filter: grayscale(1) saturate(0);
   -webkit-filter: grayscale(1) saturate(0);
 }
 
-/* Garantir que a barra de navegação permaneça sempre colorida */
 body.a11y-desaturate .navbar {
   filter: none !important;
-}
-
-/* pequeno indicador visual para o estado de acessibilidade */
-#a11y-indicator {
-  transition: opacity .35s ease, transform .25s;
-  opacity: 0;
 }
 
 /* ------------------------- Navegação --------------------------------- */
@@ -87,7 +90,7 @@ body.a11y-desaturate .navbar {
   border: 2px solid transparent;
   font-weight: 600;
   cursor: pointer;
-  transition: all .25s;
+  transition: all var(--transition);
 }
 
 .nav-btn:hover {
@@ -104,7 +107,7 @@ body.a11y-desaturate .navbar {
   padding: 6px;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform .25s, box-shadow .25s;
+  transition: transform var(--transition), box-shadow var(--transition);
   background: transparent;
 }
 
@@ -113,7 +116,7 @@ body.a11y-desaturate .navbar {
   width: 40px;
   height: auto;
   display: block;
-  transition: transform .25s;
+  transition: transform var(--transition);
 }
 
 .letraAcess:hover,
@@ -145,7 +148,7 @@ body.a11y-desaturate .navbar {
   z-index: 2000;
   opacity: 0;
   visibility: hidden;
-  transition: all .28s;
+  transition: all var(--transition);
 }
 
 .modal-content {
@@ -155,7 +158,7 @@ body.a11y-desaturate .navbar {
   width: 94%;
   max-width: 560px;
   transform: scale(0.96);
-  transition: all .28s;
+  transition: all var(--transition);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   max-height: 84vh;
   overflow: auto;
@@ -178,7 +181,7 @@ body.a11y-desaturate .navbar {
   color: #333;
 }
 
-/* Visibilidade modal controlada por caixas de seleção */
+/* checkbox-driven modal visibility (keeps existing HTML structure) */
 #modal-cadastro:checked ~ .modal-overlay:nth-of-type(1),
 #modal-login:checked ~ .modal-overlay:nth-of-type(2),
 #modal-consulta:checked ~ .modal-overlay:nth-of-type(3),
@@ -216,10 +219,10 @@ body.a11y-desaturate .navbar {
 .form-group select,
 .form-group textarea {
   padding: 12px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-light);
   border-radius: 10px;
   font-size: 15px;
-  transition: border-color .2s;
+  transition: border-color var(--transition);
 }
 
 .form-group input:focus,
@@ -242,7 +245,7 @@ body.a11y-desaturate .navbar {
   border: none;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background var(--transition);
 }
 
 .submit-btn:hover {
@@ -304,10 +307,10 @@ section h2 {
 }
 
 .card {
-  background: #f5f5f5;
+  background: var(--surface);
   padding: 25px;
   border-radius: 10px;
-  transition: transform 0.3s;
+  transition: transform var(--transition);
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
@@ -318,7 +321,7 @@ section h2 {
 
 .card h3 {
   margin-bottom: 15px;
-  color: #2d572c;
+  color: var(--brand);
   font-size: 1.2rem;
 }
 
@@ -345,16 +348,16 @@ section h2 {
 
 .access-box .btn {
   text-decoration: none;
-  background: #2d572c;
+  background: var(--brand);
   color: white;
   padding: 15px 30px;
   border-radius: 10px;
-  transition: background 0.3s;
+  transition: background var(--transition);
   cursor: pointer;
   display: inline-block;
 }
 
-.access-box .btn:hover { background: #5aa85a; }
+.access-box .btn:hover { background: var(--brand-strong); }
 
 /* ------------------------- Filtros / Lista de móveis ------------------- */
 .filtros {
@@ -370,18 +373,18 @@ section h2 {
 
 .filtros label {
   padding: 8px 15px;
-  background: #2d572c;
+  background: var(--brand);
   color: white;
   margin: 0 5px 5px 0;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background var(--transition);
   display: inline-block;
 }
 
-.filtros label:hover { background: #3e6f3d; }
+.filtros label:hover { background: var(--brand-dark); }
 
-.filtros input:checked + label { background: #5aa85a; }
+.filtros input:checked + label { background: var(--brand-strong); }
 
 .lista-moveis {
   display: grid;
@@ -408,17 +411,17 @@ section h2 {
   margin-top: 10px;
   width: 100%;
   padding: 8px 12px;
-  background: #d32f2f;
+  background: var(--danger);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
+  transition: background var(--transition);
 }
 
 .movel button:hover {
-  background: #b71c1c;
+  background: var(--danger-dark);
 }
 
 /* Seção de Pesquisa */
@@ -466,12 +469,12 @@ section h2 {
 }
 
 .btn-pesquisar {
-  background: #2d572c;
+  background: var(--brand);
   color: white;
 }
 
 .btn-pesquisar:hover {
-  background: #1e3d1f;
+  background: var(--brand-dark);
 }
 
 .btn-limpar {
@@ -498,7 +501,7 @@ section h2 {
 }
 
 .btn-deletar-todos:hover {
-  background: #b71c1c !important;
+  background: var(--danger-dark) !important;
 }
 
 /* Mostrar móveis baseado no filtro (estrutura existente) */
@@ -533,7 +536,7 @@ section h2 {
 
 .stat-card:hover { transform: translateY(-5px); }
 
-.stat-card h3 { margin-bottom: 15px; color: #2d572c; }
+.stat-card h3 { margin-bottom: 15px; color: var(--brand); }
 
 /* ------------------------- Rodapé ------------------------------------ */
 footer {
